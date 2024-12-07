@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+vendor-bin/phpcs/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run -v
+
+if [ $? -ne 0 ]; then
+  echo "PHP CS Fixer found issues. Please fix them before committing."
+  exit 1
+fi
+
+exit 0
