@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    
     public function generateReport()
     {
         $totalOrders = Order::count();
@@ -24,6 +22,5 @@ class ReportController extends Controller
             'total_products_sold' => $totalProductsSold,
             'total_revenue' => $totalRevenue,
         ]);
-        
     }
 }

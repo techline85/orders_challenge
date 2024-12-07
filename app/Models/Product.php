@@ -14,13 +14,12 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'stock'
+        'stock',
     ];
-
 
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class,'order_products')
+        return $this->belongsToMany(Order::class, 'order_products')
                 ->withPivot('quantity')
                 ->withTimestamps();
     }

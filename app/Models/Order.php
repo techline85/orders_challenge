@@ -11,11 +11,11 @@ class Order extends Model
     use HasFactory;
     protected $fillable = [
         'customer_name',
-        'status'
+        'status',
     ];
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class,'order_products')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'order_products')->withPivot('quantity')->withTimestamps();
     }
 }

@@ -12,13 +12,15 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $this->authorize('viewAny',Order::class);
+        $this->authorize('viewAny', Order::class);
         $orders = Order::all();
+
         return OrderResource::collection($orders->load('products'));
     }
 
@@ -27,7 +29,6 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -36,9 +37,8 @@ class OrderController extends Controller
     public function store(OrderRequest $request)
     {
         $order = Order::create($request->all());
-        foreach($request->products as $product)
-        {
-            $order->products()->attach($product['id'],['quantity' => $product['quantity']]);
+        foreach ($request->products as $product) {
+            $order->products()->attach($product['id'], ['quantity' => $product['quantity']]);
 
             Product::find($product['id'])->decrement('stock', $product['quantity']);
         }
@@ -59,7 +59,6 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -67,7 +66,6 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
     }
 
     /**
@@ -75,6 +73,5 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
 }

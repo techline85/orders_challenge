@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Helpers\UserHelper;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ProductPolicy
 {
@@ -30,7 +29,7 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === UserHelper::ADMIN;
+        return UserHelper::ADMIN === $user->role;
     }
 
     /**
@@ -38,7 +37,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->role === UserHelper::ADMIN;
+        return UserHelper::ADMIN === $user->role;
     }
 
     /**
@@ -46,7 +45,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->role === UserHelper::ADMIN;
+        return UserHelper::ADMIN === $user->role;
     }
 
     /**
@@ -54,7 +53,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return $user->role === UserHelper::ADMIN;
+        return UserHelper::ADMIN === $user->role;
     }
 
     /**
@@ -62,6 +61,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return $user->role === UserHelper::ADMIN;
+        return UserHelper::ADMIN === $user->role;
     }
 }

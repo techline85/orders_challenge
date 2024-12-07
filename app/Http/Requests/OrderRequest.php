@@ -29,31 +29,29 @@ class OrderRequest extends FormRequest
             'status' => ['required', Rule::in(OrderHelper::ORDER_STATUSES)],
             'products' => 'required|array',
             'products.*.id' => 'required|integer|exists:products,id',
-            'products.*.quantity' => 'required|integer|min:1'
+            'products.*.quantity' => 'required|integer|min:1',
         ];
     }
 
-
     public function withValidator($validator)
     {
-        $validator->after(function($validator) {
+        $validator->after(function ($validator) {
             $this->validateStock($validator);
         });
     }
-
 
     protected function validateStock($validator)
     {
         foreach ($this->products as $product) {
             $productModel = Product::find($product['id']);
-            
+
             if (!$productModel) {
                 continue;
             }
 
             if ($productModel->stock < $product['quantity']) {
                 $validator->errors()->add(
-                    'products.' . $product['id'] . '.quantity',
+                    'products.'.$product['id'].'.quantity',
                     "La quantità richiesta per il prodotto '{$productModel->name}' supera lo stock disponibile ({$productModel->stock})."
                 );
             }

@@ -18,11 +18,11 @@ class OrderResource extends JsonResource
             'id' => $this->id,
             'customer_name' => $this->customer_name,
             'products' => OrderProductResource::collection($this->whenLoaded('products')),
-            'total' => $this->products->sum(function($product) {
+            'total' => $this->products->sum(function ($product) {
                 return $product->pivot->quantity * $product->price;
             }),
             'status' => $this->status,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
         ];
     }
 }

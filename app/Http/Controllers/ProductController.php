@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use JsonException;
-use Throwable;
 
 class ProductController extends Controller
 {
     use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +25,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -36,12 +32,13 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->authorize('create',Product::class);
-        try{
+        $this->authorize('create', Product::class);
+        try {
             $product = Product::create($request->all());
+
             return new ProductResource($product);
-        }catch(Throwable $e) {
-            return new JsonException($e->getMessage());
+        } catch (\Throwable $e) {
+            return new \JsonException($e->getMessage());
         }
     }
 
@@ -58,7 +55,6 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -67,6 +63,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product)
     {
         $product->update($request->validated());
+
         return new ProductResource($product);
     }
 
@@ -76,6 +73,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return new JsonResponse(['message'=>'Product Deleted']);
+
+        return new JsonResponse(['message' => 'Product Deleted']);
     }
 }
