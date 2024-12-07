@@ -34,9 +34,9 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
         try {
-            $product = Product::create($request->all());
+            $product2 = Product::create($request->all());
 
-            return new ProductResource($product);
+            return new ProductResource($product2);
         } catch (\Throwable $e) {
             return new \JsonException($e->getMessage());
         }
