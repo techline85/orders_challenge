@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny',Order::class);
+        $this->authorize('viewAny', Order::class);
         $orders = Order::all();
 
         return OrderResource::collection($orders->load('products'));
