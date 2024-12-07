@@ -8,7 +8,7 @@ class OrderHelper
     public const COMPLETED = 'completed';
     public const CANCELLED = 'cancelled';
 
-    public const ORDER_STATUSES = [
+    public const ORDER_STATUSES=[
         self::PENDING,
         self::COMPLETED,
         self::CANCELLED,
