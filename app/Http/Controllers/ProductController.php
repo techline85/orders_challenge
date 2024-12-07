@@ -32,7 +32,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $this->authorize('create', Product::class);
+        $this->authorize('create',Product::class);
         try {
             $product = Product::create($request->all());
 
